@@ -1,0 +1,72 @@
+const Card = (props) => {
+	return (
+  	<div style={{maring: '1em'}}>
+    	<img width="75" src = {props.avatar_url} />
+      <div style={{display: 'inline-block', marginLeft: 10}}>
+      	<div style={{fontSize: '1.25em', fontWeight:'bold'}}>
+        {props.name}
+        </div>
+        <div>{props.company}</div>
+      </div>
+    </div>
+  );
+};
+
+
+
+const CardList = (props) => {
+	return (
+  	<div>
+    {props.cards.map(card => <Card {...card} />)}
+    </div>
+  );
+}
+
+
+
+class Form extends React.Component {
+		state = {userName; '' }
+    handleSubmit = (event) => {
+    	event.preventDefault();
+      console.log('Event: Form Submit', this.userNameInput.value);
+    }; 
+    render() {
+    	return (
+      	<form onSubmit={this.handleSubmit}>
+        <input type="text" 
+        	value ={this.state.userName}
+          onChange={(event= => this.setState({userName: event.target.value})}
+          placeholder="Github username" required />
+        <button type="submit">Add card</button>
+        </form>
+      );
+    }
+}
+
+class App extends React.Component {
+	state = {
+  	cards: [
+      { name:"apina",
+        avatar_url:"https://avatars0.githubusercontent.com/u/156389?v=4",
+        company:"Roima" },
+      { name:"banaani",
+        avatar_url:"https://avatars0.githubusercontent.com/u/1955899?v=4",
+        company:"Google" }
+    ]
+  };
+  render() {
+  	return (
+    	<div>
+      	<Form />
+        <CardList cards={this.state.cards} />
+      </div>
+    )
+  }
+}
+
+ReactDOM.render(<App />, mountNode);
+
+
+
+
+
